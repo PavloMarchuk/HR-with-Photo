@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HR.DateLayer.DbLayer.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class=" row">
+    <div class="col-md-1">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayNameFor(model => model.DateBirthday)
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayNameFor(model => model.Inn)
+    </div>
+</div>
+
+ <br />
+
+@foreach (var item in Model)
+{
+    <div class=" row">
+        <div class="col-md-1">
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </div>
+        <div class="col-md-1">
+            @Html.DisplayFor(modelItem => item.LastName)
+        </div>
+        <div class="col-md-1">
+            @Html.DisplayFor(modelItem => item.DateBirthday)
+        </div>
+        <div class="col-md-1">
+            @Html.DisplayFor(modelItem => item.Inn)
+        </div>
+        <div class="col-md-2">
+            <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+        </div>
+    </div>
+
+}

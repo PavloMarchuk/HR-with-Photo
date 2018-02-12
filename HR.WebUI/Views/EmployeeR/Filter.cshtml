@@ -1,0 +1,68 @@
+﻿@model HR.WebUI.Models.EmployeeFilter
+
+@{
+    ViewData["Title"] = "Filter";
+}
+<link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+<h2>Filter</h2>
+
+<h4>EmployeeFilter</h4>
+<hr />
+<div class="row">
+        <form asp-action="Filter" id="formfilter">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-2">
+                <input asp-for="FirstName" class="form-control" placeholder="input string for find"/>
+            </div>
+
+            <div class="col-md-2">
+                <input asp-for="LastName" class="form-control" placeholder="input string for find"/>
+            </div>
+
+            <div class="col-md-2">
+                <input asp-for="StartBirthday" type="date" class="form-control datepicker" placeholder="input start date to find" />
+            </div>
+
+            <div class="col-md-2">
+                <input asp-for="EndBirthday" type="date" class="form-control datepicker" placeholder="input end date to find"/>
+            </div>
+            <div class="col-md-2">
+                <input id="go" type="button" value="go" class="btn btn-lg btn-primary" />
+            </div>
+        </form>
+
+            <div id="employee"></div>
+
+    </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/locales/bootstrap-datepicker.uk.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#go').click(function () {
+                var filter = $('#formfilter').serialize();
+                $('#employee').load('@Url.Action("GetData", "EmployeeR")', filter);
+            });
+
+
+            $("input[type='date']").each(function () {
+                $(this).datepicker({ dateFormat: 'dd/mm/yy' })
+                    .get(0).setAttribute("type", "text");
+            });
+
+        });
+
+        var culture = "@System.Globalization.CultureInfo.CurrentCulture.Name".substr(0, 2);
+        $('.datepicker').datepicker({ language: culture, format: 'yyyy/mm/dd' });
+    </script>
+}

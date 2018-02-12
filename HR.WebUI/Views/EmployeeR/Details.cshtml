@@ -1,0 +1,53 @@
+﻿@model HR.DateLayer.DbLayer.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateBirthday)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateBirthday)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Inn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Inn)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <div class="col-md-6">
+        @foreach (var item in Model.Photo)
+         {
+            <img src="@Html.DisplayFor(modelItem => item.PhotoPath)" height="200" />
+         }
+    </div>
+
+</div>
+<img src="~/Files/f1.jpg" />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
